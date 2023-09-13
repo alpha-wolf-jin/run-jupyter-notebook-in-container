@@ -94,3 +94,8 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 
 ```
 
+**Open_High_Low_Close_Aclose_Volume_close_30_day-01.h5** is the model traning for predict next days China Contruction Bank stock price.
+
+**939_predict_day_01.py** is the python script converted from Jupyter notebook, which uses the above model to predict the stock price.
+
+This python script need internet access to download the last 60 days data of China Contruction Bank stock price from yahoo finance.
