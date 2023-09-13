@@ -33,3 +33,64 @@ Original file is located at
     https://colab.research.google.com/drive/1tBmJ-Uw0SqDfILHQ74xaTYe4FxmXaGsC
 """
 ```
+
+# Create an Image From a Container
+
+## Start container and install python lib yfinance
+```
+[root@aap-eda ai]# podman run -it --name jupyter-notebook --entrypoint /bin/bash quay.io/truecharts/jupyter-tensorflow:latest
+(base) jovyan@4107db8c2045:~$ pip3 install yfinance
+...
+Installing collected packages: multitasking, appdirs, lxml, html5lib, frozendict, yfinance
+Successfully installed appdirs-1.4.4 frozendict-2.3.8 html5lib-1.1 lxml-4.9.3 multitasking-0.0.11 yfinance-0.2.28
+```
+
+**keep that container alive, don’t need to do anything**
+
+## Create an Image From a Container
+
+So at this point, we’ve updated the contents of a running container and as long as we keep that container alive, we don’t need to do anything.
+
+And Create other session to commit the changes.
+
+To save a Docker container, we just need to use the docker commit command like this:
+
+```
+[root@aap-eda ai]# podman commit jupyter-notebook
+
+Storing signatures
+01a3b8a3ac9adb5bfd0a15bca562ea25957670fc8d4afaab01f16e491856530d
+
+[root@aap-eda ai]# podman images
+REPOSITORY                                                            TAG         IMAGE ID      CREATED        SIZE
+<none>                                                                <none>      01a3b8a3ac9a  3 minutes ago  5.93 GB
+
+[root@aap-eda ai]# podman tag 01a3b8a3ac9a localhost/jupyter-tensorflow:latest
+```
+
+## Run **939_predict_day_01.py** in container
+
+```
+[root@aap-eda ai]# ll scripts/
+total 14192
+-rwxr-xr-x. 1 root root     3526 Sep 13 23:17 939_predict_day_01.py
+-rw-r--r--. 1 root root 14524448 Sep 13 22:08 Open_High_Low_Close_Aclose_Volume_close_30_day-01.h5
+lrwxrwxrwx. 1 root root       21 Sep 13 22:31 script.py -> 939_predict_day_01.py
+
+[root@aap-eda scripts]# podman rm jupyter-notebook
+jupyter-notebook
+[root@aap-eda scripts]# podman run --name jupyter-notebook -v $(pwd):/home/jovyan/scripts:Z --entrypoint /home/jovyan/scripts/939_predict_day_01.py localhost/jupyter-tensorflow:latest
+2023-09-13 15:35:01.334094: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+
+2023-09-13 15:35:01.377292: I tensorflow/tsl/cuda/cudart_stub.cc:28] Could not find cuda drivers on your machine, GPU will not be used.
+2023-09-13 15:35:01.377768: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-09-13 15:35:02.233651: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+[*********************100%%**********************]  1 of 1 completed
+1/1 [==============================] - 0s 370ms/step
+1/1 [==============================] - 0s 20ms/step
+2023-09-14 4.3220162
+[root@aap-eda scripts]# 
+
+```
+
