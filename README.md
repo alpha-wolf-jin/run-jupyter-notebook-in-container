@@ -1,5 +1,6 @@
 # run-jupyter-notebook-in-container
 
+```
 echo "# run-jupyter-notebook-in-container" >> README.md
 git init
 git add README.md
@@ -12,13 +13,14 @@ git config --global credential.helper 'cache --timeout 72000'
 git push -u origin main
 
 git add . ; git commit -a -m "update README" ; git push -u origin main
+```
 
 
 # Manually convert notebook to .py script
 The next approach is to manually convert Jupyter Notebook to Python .py script. Please click File->Download as->Python (.py):
 ![SSO](images/jupyter-01.png)
 
-Insert the **#!/usr/bin/env python3** as first line:
+Insert the **#!/usr/bin/env python3** as first line of the download file **939_predict_day_01.py**
 ```
 #!/usr/bin/env python3
 
