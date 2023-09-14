@@ -99,3 +99,28 @@ To enable the following instructions: AVX2 FMA, in other operations, rebuild Ten
 **939_predict_day_01.py** is the python script converted from Jupyter notebook, which uses the above model to predict the stock price.
 
 This python script need internet access to download the last 60 days data of China Contruction Bank stock price from yahoo finance.
+
+# Use the container
+
+**Container is dowm status**
+```
+[root@aap-eda scripts]# podman ps 
+CONTAINER ID  IMAGE       COMMAND     CREATED     STATUS      PORTS       NAMES
+[root@aap-eda scripts]# podman ps -a | grep jupyter-notebook
+5fa4986946a4  localhost/jupyter-tensorflow:latest                                                        12 minutes ago  Exited (0) About a minute ago                                                  jupyter-notebook
+[root@aap-eda scripts]# 
+```
+
+**Start Container & Get report**
+```
+[root@aap-eda scripts]# podman start jupyter-notebook ; podman logs  jupyter-notebook
+
+...
+[*********************100%%**********************]  1 of 1 completed
+1/1 [==============================] - 0s 354ms/step
+1/1 [==============================] - 0s 18ms/step
+         Date  Predictions   Actuals
+0  2023-09-14     4.327294  4.367615
+1  2023-09-15     4.344217  4.367615
+2023-09-15 4.344217
+````

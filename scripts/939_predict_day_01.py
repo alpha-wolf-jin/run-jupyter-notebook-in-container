@@ -112,6 +112,6 @@ actual.flatten()
 
 present_results = pd.DataFrame(data={'Date':index_date_test, 'Predictions':y_pred_futue.flatten(), 'Actuals':actual.flatten()})
 
-#print(present_results), type(present_results),
+print(present_results), type(present_results),
 
 print(present_results['Date'][1], present_results['Predictions'][1])
