@@ -77,6 +77,8 @@ total 14192
 -rw-r--r--. 1 root root 14524448 Sep 13 22:08 Open_High_Low_Close_Aclose_Volume_close_30_day-01.h5
 lrwxrwxrwx. 1 root root       21 Sep 13 22:31 script.py -> 939_predict_day_01.py
 
+[root@aap-eda ai]# cd scripts
+
 [root@aap-eda scripts]# podman rm jupyter-notebook
 jupyter-notebook
 [root@aap-eda scripts]# podman run --name jupyter-notebook -v $(pwd):/home/jovyan/scripts:Z --entrypoint /home/jovyan/scripts/939_predict_day_01.py localhost/jupyter-tensorflow:latest
