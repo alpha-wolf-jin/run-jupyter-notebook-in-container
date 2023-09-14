@@ -112,8 +112,11 @@ CONTAINER ID  IMAGE       COMMAND     CREATED     STATUS      PORTS       NAMES
 ```
 
 **Start Container & Get report**
+
+You can restart the container at any directory this time.
+
 ```
-[root@aap-eda scripts]# podman start jupyter-notebook ; podman logs  jupyter-notebook
+[root@aap-eda ~]# podman start jupyter-notebook ; podman logs  jupyter-notebook
 
 ...
 [*********************100%%**********************]  1 of 1 completed
