@@ -85,7 +85,7 @@ for i in range(n_past, len(df) - n_future + 1):
 
 X, y = np.array(trainX), np.array(trainY)
 
-test_length = -1 * n_future - 1
+test_length = -1 * n_future - 2
 
 X_test, y_test = X[test_length:], y[test_length:]
 index_date_test = index_date[test_length:]
